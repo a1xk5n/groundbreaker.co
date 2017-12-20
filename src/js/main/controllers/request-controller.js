@@ -13,18 +13,29 @@ axios.defaults.headers.common.Authorization = `token ${ACCESS_TOKEN}`;
 export const getUsers = userName =>
     axios
         .get(`/search/users?q=${userName}+in:login&type=user`)
-        .then(response => response.data.items)
-        .then(users => List(users.map(user => UserRecord.parse(user))));
+        .then(response => response.data.items, error => Promise.reject(error))
+        .then(
+            users => List(users.map(user => UserRecord.parse(user))),
+            error => Promise.reject(error),
+        );
 
 export const getUser = userName =>
-    axios.get(`/users/${userName}`).then(response => CurrentUserRecord.parse(response.data));
+    axios
+        .get(`/users/${userName}`)
+        .then(response => CurrentUserRecord.parse(response.data), error => Promise.reject(error));
 
 export const getUserRepos = userName =>
     axios
         .get(`/users/${userName}/repos`)
-        .then(response => List(response.data.map(repo => RepoRecord.parse(repo))));
+        .then(
+            response => List(response.data.map(repo => RepoRecord.parse(repo))),
+            error => Promise.reject(error),
+        );
 
 export const getUserRepoIssues = (userName, repo) =>
     axios
         .get(`/repos/${userName}/${repo.get('name')}/issues`)
-        .then(response => ({ issuesCount: response.data.length, repoId: repo.get('id') }));
+        .then(
+            response => ({ issuesCount: response.data.length, repoId: repo.get('id') }),
+            error => Promise.reject(error),
+        );

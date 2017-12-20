@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from 'immutable';
 import {
     Table,
     TableBody,
@@ -18,21 +19,24 @@ import './modal.scss';
 
 export default class Modal extends React.PureComponent {
     static propTypes = {
-        isUserLoading: PropTypes.bool.isRequired,
+        isUserLoading: PropTypes.bool,
         userName: PropTypes.string,
         avatarUrl: PropTypes.string,
-        repos: CustomPropTypes.immutableListOf(PropTypes.instanceOf(RepoRecord)).isRequired,
+        repos: CustomPropTypes.immutableListOf(PropTypes.instanceOf(RepoRecord)),
     };
 
     static defaultProps = {
+        isUserLoading: false,
         userName: '',
         avatarUrl: '',
+        repos: List(),
     };
 
     getIssuesMockup = (repo) => {
         if (repo.get('isIssueLoading')) {
             return <Spinner className="modal__issue-spinner" />;
         }
+
         return repo.get('issuesCount');
     };
 
@@ -40,6 +44,7 @@ export default class Modal extends React.PureComponent {
         if (this.props.isUserLoading) {
             return <Spinner className="modal__spinner" />;
         }
+
         return (
             <div className="modal">
                 <div className="modal__title">{this.props.userName}</div>

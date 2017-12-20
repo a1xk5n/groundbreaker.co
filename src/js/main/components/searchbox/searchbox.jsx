@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import './searchbox.scss';
 
@@ -12,7 +11,6 @@ export default class Searchbox extends React.PureComponent {
     static propTypes = {
         searchString: PropTypes.string.isRequired,
         onChangeSearchString: PropTypes.func.isRequired,
-        onSearchClick: PropTypes.func.isRequired,
         onResetClick: PropTypes.func.isRequired,
     };
 
@@ -35,8 +33,7 @@ export default class Searchbox extends React.PureComponent {
     };
 
     render() {
-        const { searchString, onSearchClick } = this.props;
-        const isButtonDisabled = !searchString;
+        const { searchString } = this.props;
 
         return (
             <div className="searchbox">
@@ -48,12 +45,6 @@ export default class Searchbox extends React.PureComponent {
                     floatingLabelFixed
                     fullWidth
                     onChange={this.onChangeSearchString}
-                />
-                <RaisedButton
-                    label="Search"
-                    primary
-                    onClick={onSearchClick}
-                    disabled={isButtonDisabled}
                 />
             </div>
         );

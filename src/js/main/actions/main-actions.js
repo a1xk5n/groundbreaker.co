@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { searchUsers } from '../actions/users-actions';
 
 export const changeSearchString = createAction('CHANGE_SEARCH_STRING', searchString => ({
     searchString,
@@ -16,4 +17,9 @@ export const resetAll = () => (dispatch) => {
     dispatch(resetMainReducer());
     dispatch(resetUsersReducer());
     dispatch(resetCurrentUserReducer());
+};
+
+export const changeSearchStringValue = value => (dispatch) => {
+    dispatch(changeSearchString(value));
+    dispatch(searchUsers(value));
 };

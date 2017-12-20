@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
-import { changeSearchString, resetAll } from '../actions/main-actions';
-import { searchUsers } from '../actions/users-actions';
+import { changeSearchStringValue, resetAll } from '../actions/main-actions';
 
 import Searchbox from '../components/searchbox/searchbox';
 
@@ -11,10 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onChangeSearchString: (string) => {
-        dispatch(changeSearchString(string));
-    },
-    onSearchClick: () => {
-        dispatch(searchUsers());
+        dispatch(changeSearchStringValue(string));
     },
     onResetClick: () => {
         dispatch(resetAll());
