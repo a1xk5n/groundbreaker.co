@@ -1,13 +1,21 @@
 import React from 'react';
-import { combineReducers, createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const reducer = combineReducers({});
-const store = createStore(reducer, applyMiddleware(thunk));
+import store from '../../store/store';
+
+import Searchbox from '../../containers/searchbox-container';
+import UsersList from '../../containers/users-list-container';
+
+import './main.scss';
 
 export default () => (
     <Provider store={store}>
-        <p>Hello</p>
+        <MuiThemeProvider>
+            <div className="main__wrapper">
+                <Searchbox />
+                <UsersList />
+            </div>
+        </MuiThemeProvider>
     </Provider>
 );

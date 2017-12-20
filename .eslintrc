@@ -2,7 +2,8 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "globals": {
-        "document": true
+        "document": true,
+        "window": true
     },
     "rules": {
         "indent": ["error", 4],
@@ -17,6 +18,12 @@
         "import/no-unresolved": "none",
         "import/extensions": "never",
         "import/prefer-default-export": "none",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allow": ["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"]
+            }
+        ]
     }
 }
